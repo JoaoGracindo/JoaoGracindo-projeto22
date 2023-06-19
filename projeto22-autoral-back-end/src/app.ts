@@ -8,6 +8,7 @@ import { loadEnv, connectDb, disconnectDB } from '@/config';
 loadEnv();
 
 import { authenticationRouter, usersRouter } from '@/routers';
+import { chaletRouter } from './routers/chalet-router';
 
 const app = express();
 app
@@ -15,7 +16,8 @@ app
   .use(express.json())
   .get('/health', (_req, res) => res.send('OK!'))
   .use('/users', usersRouter)
-  .use('/auth', authenticationRouter);
+  .use('/auth', authenticationRouter)
+  .use('/chalet', chaletRouter);
 
 export function init(): Promise<Express> {
   connectDb();
